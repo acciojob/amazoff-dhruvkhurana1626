@@ -21,7 +21,7 @@ public class OrderRepository {
 
     public void saveOrder(Order order){
         // your code here
-        if(orderMap.containsKey(order.getId()) return;
+        if(orderMap.containsKey(order.getId())) return;
         String id = order.getId();
         orderMap.put(id,order);
     }
@@ -115,10 +115,11 @@ public class OrderRepository {
         int count = 0;
 
         for(String orderid : allordersofpartner){
-            Order order = orderMap.get(orderid);
-            if(!orderToPartnerMap.containsKey(orderid))continue;
-            int completionTime = order.getDeliveryTime();
-            if(time>completionTime)count++;
+            if(!orderToPartnerMap.containsKey(orderid)) {
+                Order order = orderMap.get(orderid);
+                int completionTime = order.getDeliveryTime();
+                if (time > completionTime) count++;
+            }
         }
 
         return count;
