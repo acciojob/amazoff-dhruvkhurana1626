@@ -36,35 +36,29 @@ public class OrderController {
 
     @PutMapping("/add-order-partner-pair")
     public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId){
+
         orderService.createOrderPartnerPair(orderId,partnerId);
-        //This is basically assigning that order to that partnerId
         return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.CREATED);
     }
 
     @GetMapping("/get-order-by-id/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable String orderId){
 
-        Order order= null;
-        //order should be returned with an orderId.
-        orderService.getOrderById(orderId);
+        Order order= orderService.getOrderById(orderId);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-partner-by-id/{partnerId}")
     public ResponseEntity<DeliveryPartner> getPartnerById(@PathVariable String partnerId){
 
-        DeliveryPartner deliveryPartner = null;
-        //deliveryPartner should contain the value given by partnerId
-        orderService.getPartnerById(partnerId);
+        DeliveryPartner deliveryPartner = orderService.getPartnerById(partnerId);
         return new ResponseEntity<>(deliveryPartner, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-order-count-by-partner-id/{partnerId}")
     public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId){
 
-        Integer orderCount = 0;
-        //orderCount should denote the orders given by a partner-id
-        orderService.getOrderCountByPartnerId(partnerId);
+        Integer orderCount = orderService.getOrderCountByPartnerId(partnerId);
         return new ResponseEntity<>(orderCount, HttpStatus.CREATED);
     }
 
@@ -96,9 +90,7 @@ public class OrderController {
 
     @GetMapping("/get-last-delivery-time/{partnerId}")
     public ResponseEntity<String> getLastDeliveryTimeByPartnerId(@PathVariable String partnerId){
-        String time = null;
-        //Return the time when that partnerId will deliver his last delivery order.
-        orderService.getLastDeliveryTimeByPartnerId(partnerId);
+        String time = orderService.getLastDeliveryTimeByPartnerId(partnerId);
         return new ResponseEntity<>(time, HttpStatus.CREATED);
     }
 
